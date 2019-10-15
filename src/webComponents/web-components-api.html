@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Components API</title>
+    <style media="screen">
+      .card {
+        background-color: #eee;
+        display: flex;
+        border-radius: 4px;
+        padding: 20px;
+        max-width: 500px;
+      }
+      .photo img {
+        width: 200px;
+      }
+      .container {
+        margin: 30px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <user-card
+      class="card"
+    ></user-card>
+    <script type="text/javascript">
+      class UserCard extends HTMLElement {
+        constructor() {
+          super();
+
+          const image = document.createElement('img');
+          image.src = 'https://avatars0.githubusercontent.com/u/8908111?s=460&v=4'
+          image.classList.add('image');
+
+          const photo = document.createElement('div');
+          photo.classList.add('photo');
+
+          const container = document.createElement('div');
+          container.classList.add('container');
+
+          const name = document.createElement('p');
+          name.classList.add('name');
+          name.innerText = 'User Name';
+
+          const email = document.createElement('p');
+          email.classList.add('email');
+          email.innerText = 'yourmail@some-email.com';
+
+          const button = document.createElement('button');
+          button.classList.add('button');
+          button.innerText = 'Follow';
+
+          photo.append(image);
+          container.append(name, email, button);
+          this.append(photo, container);
+        }
+      }
+
+      window.customElements.define('user-card', UserCard);
+    </script>
+  </body>
+</html>

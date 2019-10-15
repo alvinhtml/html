@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Web Components API</title>
+
+</head>
+
+<body>
+  <template id="userCardTemplate">
+    <style>
+      /* <template>样式里面的:host伪类，指代自定义元素本身 */
+      :host, .card {
+        background-color: #eee;
+        display: flex;
+        border-radius: 4px;
+        padding: 20px;
+        max-width: 500px;
+      }
+
+      .photo img {
+        width: 200px;
+      }
+
+      .container {
+        margin: 30px;
+        text-align: center;
+      }
+    </style>
+    <div class="photo"><img src="https://avatars0.githubusercontent.com/u/8908111?s=460&amp;v=4" class="image"></div>
+    <div class="container">
+      <p class="name">User Name</p>
+      <p class="email">yourmail@some-email.com</p>
+      <button class="button">Follow</button>
+    </div>
+  </template>
+
+  <user-card
+    class="card"
+    image="https://avatars0.githubusercontent.com/u/8908111?s=460&amp;v=4"
+    name="Yang Gang"
+    email="yanggang@gmail.com"
+  ></user-card>
+
+
+  <script type="text/javascript">
+    class UserCard extends HTMLElement {
+      constructor() {
+        super();
+
+        const shadow =  this.attachShadow( { mode: 'closed' } );
+
+        const userCardTemplate = document.getElementById('userCardTemplate');
+
+        // clone userCardTemplate
+        const component = userCardTemplate.content.cloneNode(true);
+
+        component.querySelector('img').setAttribute('src', this.getAttribute('image'));
+        component.querySelector('.container>.name').innerText = this.getAttribute('name');
+        component.querySelector('.container>.email').innerText = this.getAttribute('email');
+
+        component.querySelector('.container>.button').addEventListener('click', this.handleClick.bind(this));
+
+        shadow.append(component);
+      }
+
+      handleClick(e) {
+        console.log(`Follow ${this.getAttribute('name')}`);
+      }
+
+      connectedCallback() {
+        console.log("组件加载成功！");
+      }
+    }
+
+    window.customElements.define('user-card', UserCard);
+  </script>
+</body>
+
+</html>
