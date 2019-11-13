@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body {
+        display: flex;
+        align-item: center;
+        justify-content: center;
+      }
+      .container {
+        display: flex;
+        width: 260px;
+        height: 260px;
+        padding: 40px;
+        background-color: rgba(255, 0, 0, .1);
+        justify-content: space-between;
+        align-items: center;
+      }
+      .circle {
+        height: 25%;
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, .1);
+      }
+      .circle span {
+        font-family: 'optima';
+        font-size: 2em;
+      }
+      .item1 {
+        align-self: flex-start;
+      }
+      .item2 {
+        align-self: center;
+      }
+      .item3 {
+        align-self: flex-end;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="circle item1"><span>1</span></div>
+      <div class="circle item2"><span>2</span></div>
+      <div class="circle item3"><span>3</span></div>
+    </div>
+  </body>
+</html>

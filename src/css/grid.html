@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>React-miniui</title>
+    <style type="text/css" media="screen">
+      .container {
+        display: grid;
+        grid-template-columns: 200px 120px 80px;
+        grid-template-rows: repeat(5, 80px);
+        grid-gap: 5px 5px
+      }
+
+      .grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .grid span {
+        font-family: 'optima';
+        font-size: 2em;
+        color: #ffffff;
+      }
+
+      .item1 {
+        background-color: #fa5a64;
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      .item2 {
+        background-color: #f48804;
+      }
+      .item3 {
+        background-color: #fbbd08;
+      }
+      .item4 {
+        background-color: #38c060;
+        grid-column-start: 2;
+        grid-column-end: 4;
+      }
+      .item5 {
+        background-color: #32c5d2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      .item6 {
+        background-color: #50d2fa;
+      }
+      .item7 {
+        background-color: #864fff;
+      }
+      .item8 {
+        background-color: #8c50c8;
+      }
+      .item9 {
+        background-color: #eb41a0;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="grid item1"><span>1</span></div>
+    <div class="grid item2"><span>2</span></div>
+    <div class="grid item3"><span>3</span></div>
+    <div class="grid item4"><span>4</span></div>
+    <div class="grid item5"><span>5</span></div>
+    <div class="grid item6"><span>6</span></div>
+    <div class="grid item7"><span>7</span></div>
+    <div class="grid item8"><span>8</span></div>
+    <div class="grid item9"><span>9</span></div>
+  </div>
+</body>
+
+</html>
