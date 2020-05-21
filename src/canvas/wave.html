@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Components API</title>
+    <style media="screen">
+      body { text-align: center;}
+      canvas {
+        margin: 20px auto;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="mycanvas" width="600" height="400"></canvas>
+
+    <script type="text/javascript">
+      const mycanvas = document.getElementById('mycanvas');
+      const context = mycanvas.getContext('2d');
+
+      let xOffset = 0; // 水平位移
+
+      window.setInterval(() => {
+        xOffset += 1;
+        if (xOffset > 60) {
+          xOffset = 0;
+        }
+      }, 200);
+
+
+      function drawSin(context) {
+        // console.time('用时');
+        const points = [];
+        const canvasWidth = 600;
+        const canvasHeight = 400;
+        const waveWidth = 100; // 波浪宽度,数越小越宽
+        const waveHeight = 5; // 波浪高度,数越大越高
+
+        context.beginPath();
+
+        for (let x = 0; x < canvasWidth; x += 0.5) {
+          const y = waveHeight * Math.sin(x * (2 * Math.PI)/waveWidth + xOffset);
+          points.push([x, 400/2 +y]);
+          context.lineTo(x, 400/2 +y);
+        }
+
+        context.lineTo(canvasWidth, canvasHeight);
+        context.lineTo(0, canvasHeight);
+        context.lineTo(points[0][0], points[0][1]);
+        context.stroke();
+        context.fill();
+
+        // console.timeEnd('用时');
+      }
+
+      function drawCircle(ctx) {
+        const r = 200;
+        const lineWidth = 1;
+        const cR = r - (lineWidth);
+        ctx.lineWidth = lineWidth;
+        ctx.beginPath();
+        ctx.arc(600/2, 400/2, cR, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.clip();
+        this.isDrawCircle = true;
+      }
+
+      function point() {
+        context.lineJoin = 'round';
+        context.clearRect(0, 0, 600, 400);
+        drawCircle(context);
+        drawSin(context);
+        window.requestAnimationFrame(point);
+      }
+
+      point();
+
+    </script>
+  </body>
+</html>
