@@ -12,64 +12,61 @@
     </style>
   </head>
   <body>
-    <canvas id="mycanvas" width="600" height="400"></canvas>
+    <canvas id="mycanvas" width="400" height="400"></canvas>
 
     <script type="text/javascript">
       const mycanvas = document.getElementById('mycanvas');
       const context = mycanvas.getContext('2d');
 
-      let xOffset = 0; // 水平位移
+      const canvasWidth = mycanvas.width;
+      const canvasHeight = mycanvas.height;
 
-      window.setInterval(() => {
-        xOffset += 1;
-        if (xOffset > 60) {
-          xOffset = 0;
-        }
-      }, 200);
-
-
-      function drawSin(context) {
-        // console.time('用时');
-        const points = [];
-        const canvasWidth = 600;
-        const canvasHeight = 400;
-        const waveWidth = 100; // 波浪宽度,数越小越宽
-        const waveHeight = 5; // 波浪高度,数越大越高
-
+      function drawWave(context, waveLength, waveWidth = 20, waveHeight = 5, offsetX, offsetY) {
         context.beginPath();
 
-        for (let x = 0; x < canvasWidth; x += 0.5) {
-          const y = waveHeight * Math.sin(x * (2 * Math.PI)/waveWidth + xOffset);
-          points.push([x, 400/2 +y]);
-          context.lineTo(x, 400/2 +y);
+        for (let x = 0; x < waveLength; x += 0.5) {
+          const y = waveHeight * Math.sin(x * (2 * Math.PI) / waveWidth - (offsetX / waveHeight)) + offsetY;
+          context.lineTo(x, y);
         }
 
-        context.lineTo(canvasWidth, canvasHeight);
-        context.lineTo(0, canvasHeight);
-        context.lineTo(points[0][0], points[0][1]);
-        context.stroke();
+        context.lineTo(waveLength, offsetY + canvasHeight);
+        context.lineTo(0, offsetY + canvasHeight);
+        context.closePath();
         context.fill();
-
-        // console.timeEnd('用时');
       }
+
+      const gradient = context.createLinearGradient(0, 0, 0, canvasHeight);
+      gradient.addColorStop(0, 'rgba(2, 248, 213, 1)');
+      gradient.addColorStop(1, 'rgba(0, 115, 112, 1)');
 
       function drawCircle(ctx) {
-        const r = 200;
-        const lineWidth = 1;
-        const cR = r - (lineWidth);
-        ctx.lineWidth = lineWidth;
+        const r = canvasHeight / 2;
         ctx.beginPath();
-        ctx.arc(600/2, 400/2, cR, 0, 2 * Math.PI);
-        ctx.stroke();
+        ctx.arc(canvasWidth / 2, canvasHeight / 2, r-1, 0, 2 * Math.PI);
+        ctx.closePath();
+        // ctx.stroke();
         ctx.clip();
-        this.isDrawCircle = true;
       }
 
+      context.lineJoin = 'round';
+
+      let xOffset = 0;
+
+      context.strokeStyle = 'rgba(38, 129, 255, 1)';
+      context.lineWidth = 1;
+      drawCircle(context);
+
       function point() {
-        context.lineJoin = 'round';
-        context.clearRect(0, 0, 600, 400);
-        drawCircle(context);
-        drawSin(context);
+        xOffset += 0.5;
+        if(xOffset > canvasWidth * 10) {
+          xOffset = 0;
+        }
+        context.clearRect(0, 0, canvasWidth, canvasHeight);
+        context.lineWidth = 0;
+        context.fillStyle = 'rgba(2, 248, 213, 1)';
+        drawWave(context, canvasWidth, 400, 8, -xOffset, canvasHeight / 3);
+        context.fillStyle = gradient;
+        drawWave(context, canvasWidth, 200, 8, -xOffset, canvasHeight / 3);
         window.requestAnimationFrame(point);
       }
 
