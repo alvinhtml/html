@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Javascript Reade File</title>
+  <style media="screen">
+    .card {
+      background-color: #eee;
+      display: flex;
+      border-radius: 4px;
+      padding: 20px;
+      max-width: 500px;
+    }
+
+    .photo img {
+      width: 200px;
+    }
+
+    .container {
+      margin: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <input id="myInput" type="file" name="file" />
+  </div>
+  <script type="text/javascript">
+    const myInput = document.getElementById('myInput');
+
+    myInput.addEventListener('change', function selectedFileChanged() {
+      console.log(this.files);
+
+      // 读取文件，主要使用的是FileReader类
+      const reader = new FileReader();
+
+      reader.onload = function fileReadCompleted() {
+        // 当读取完成时，内容只在`reader.result`中
+        //
+        console.log(reader.result);
+        console.log("JSON", JSON.parse(reader.result));
+      };
+
+      reader.readAsText(this.files[0]);
+
+      const readerArrayBuffer = new FileReader();
+
+      readerArrayBuffer.onload = function fileReadCompleted() {
+        // 当读取完成时，内容只在`reader.result`中
+        //
+        console.log(readerArrayBuffer.result);
+
+        var uint8_msg = new Uint8Array(readerArrayBuffer.result);
+
+        console.log("uint8_msg", uint8_msg);
+        // 解码成字符串
+        var decodedString = String.fromCharCode.apply(null, uint8_msg);
+        console.log(decodedString);
+        console.log("ArrayBuffer to JSON", JSON.parse(decodedString));
+
+
+      };
+
+      // readerArrayBuffer.readAsArrayBuffer(this.files[0]);
+      //
+      // const readerDataURL = new FileReader();
+      // readerDataURL.onload = function fileReadCompleted() {
+      //     const img = new Image();
+      //     img.src = readerDataURL.result;
+      //     document.body.appendChild(img);
+      // };
+      // readerDataURL.readAsDataURL(this.files[0]);
+    });
+  </script>
+
+<!--
+  总结
+
+  1）由于安全和隐私的原因，JavaScript 不能直接访问本地文件。
+
+  2）可以通过 input 类型为 file 来选择文件，并对文件进行处理。
+
+  3） file input 具有带有所选文件的files属性。
+
+  4） 我们可以使用FileReader来访问所选文件的内容。
+-->
+
+</body>
+
+</html>
