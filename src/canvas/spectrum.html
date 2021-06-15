@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Spectrum</title>
+  <style media="screen">
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="mycanvas" width="400" height="120"></canvas>
+
+  <script type="text/javascript">
+    const mycanvas = document.getElementById('mycanvas');
+    const context = mycanvas.getContext('2d');
+
+    const canvasWidth = mycanvas.width;
+    const canvasHeight = mycanvas.height;
+
+
+    function createData() {
+
+
+      let arr = [];
+
+      let scope = 0;
+      let startNum = 0;
+
+      while (arr.length < 400) {
+        scope = Math.floor(Math.random() * 7);
+        startNum = Math.floor(Math.random() * 35 + 30);
+        shortArr = Array.from(new Array(scope), (_, i) => i * 5 + startNum).concat(Array.from(new Array(scope), (_, i) => i * 5 + startNum).reverse());
+
+
+        arr = arr.concat(shortArr);
+      }
+
+      return arr;
+    }
+
+    function rgbToHex(r, g, b) {
+      const hex = ((r << 16) | (g << 8) | b).toString(16);
+      return "#" + new Array(Math.abs(hex.length - 7)).join("0") + hex;
+    }
+
+    function hexToRgb(hex) {
+      const rgb = [];
+      for (var i = 1; i < 7; i += 2) {
+        rgb.push(parseInt("0x" + hex.slice(i, i + 2)));
+      }
+      return rgb;
+    }
+
+    function gradient(startColor, endColor, step) {
+      //将hex转换为rgb
+      let sColor = hexToRgb(startColor);
+      let eColor = hexToRgb(endColor);
+
+      //计算R\G\B每一步的差值
+      let rStep = (eColor[0] - sColor[0]) / step;
+      gStep = (eColor[1] - sColor[1]) / step;
+      bStep = (eColor[2] - sColor[2]) / step;
+
+      const gradientColorArr = [];
+
+      for (let i = 0; i < step; i++) {
+        //计算每一步的hex值
+        gradientColorArr.push(rgbToHex(parseInt(rStep * i + sColor[0]), parseInt(gStep * i + sColor[1]), parseInt(bStep * i + sColor[2])));
+      }
+      return gradientColorArr;
+    }
+
+    function initColors() {
+      const beginColor = '#23c717';
+      const middleColor = '#0af9f3';
+      const endColor = '#0649f4';
+
+      const colorArr1 = gradient(beginColor, middleColor, 50);
+      const colorArr2 = gradient(middleColor, endColor, 50);
+      return colorArr1.concat(colorArr2);
+    }
+
+    const colors = initColors();
+
+
+    function free(num) {
+      return num + Math.floor(Math.random() * 20 - 10);
+    }
+
+    function drawLine(ctx, data, y) {
+      data.forEach((v, i) => {
+        ctx.fillStyle = colors[free(v)];
+        ctx.fillRect(i, y, 1, 1);
+      });
+    }
+
+    function drawSpectrum() {
+      const spectrumCanvas = document.createElement("canvas");
+      const ctx = spectrumCanvas.getContext("2d");
+      spectrumCanvas.width = 400;
+      spectrumCanvas.height = 400;
+
+      const data = createData();
+
+      console.log("data", data);
+
+      for (let i = 0; i < 120; i++) {
+        drawLine(ctx, data, i);
+      }
+
+      return spectrumCanvas;
+    }
+
+
+
+    let timeCount = 120;
+
+    const spectrumImage = drawSpectrum();
+
+    function draw() {
+
+      context.drawImage(spectrumImage, 0, timeCount);
+
+
+      // window.requestAnimationFrame(point);
+
+      window.setTimeout(() => {
+        timeCount -= 1;
+        draw();
+      }, 100);
+    }
+
+    draw();
+  </script>
+</body>
+
+</html>
