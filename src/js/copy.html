@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Spectrum</title>
+  <style media="screen">
+    body {
+      text-align: center;
+    }
+    .hidden-box {
+      position: fixed;
+      top: -9999px;
+    }
+    textarea {
+      margin: 32px 0;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <button type="button" onclick="copy()" name="button">点击复制 Input</button>
+    <button type="button" onclick="copySpan()" name="button">点击复制 Span</button>
+    <div class="hidden-box">
+      <input type="text" id="myinput" name="" value="this is input demo!">
+      <span id="myspan">this is span demo!</span>
+    </div>
+  </div>
+  <div>
+    <textarea name="name" rows="8" cols="80" placeholder="粘贴到此测试是否复制成功"></textarea>
+  </div>
+  <p>
+    document.execCommand("Copy") 只能复制可见元素，所以不能使用 display: none 隐藏元素，但可以使用 css position 隐藏元素。
+  </p>
+
+  <script type="text/javascript">
+    function copy() {
+      const input = document.querySelector('#myinput');
+      input.select();
+      document.execCommand("Copy");
+    }
+    
+    function copySpan() {
+      const span = document.querySelector('#myspan');
+      window.getSelection().selectAllChildren(span);
+      document.execCommand("Copy");
+    }
+  </script>
+</body>
+
+</html>
