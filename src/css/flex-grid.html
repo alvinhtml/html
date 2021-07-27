@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      ul {
+        display: flex;
+        list-style: none;
+        margin: 50px auto;
+        padding: 0;
+        max-width: 960px;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-flow: wrap;
+        background-color: rgba(0, 0, 255, .1);
+      }
+
+      ul li {
+        background-color: rgba(255, 0, 0, .1);
+
+        flex: 0 1 30%;
+        margin-bottom: 5%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 280px;
+      }
+
+      ul li span {
+        font-size: 48px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="container"></ul>
+    <script type="text/javascript">
+      document.querySelector('.container').innerHTML = Array.from(new Array(12), (_, i) => `<li><span>${i}</span></li>`).join('')
+    </script>
+  </body>
+</html>
