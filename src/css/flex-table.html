@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Flex List</title>
+  <style media="screen">
+    body {
+      background-color: #3b3b41;
+      font-family: Montserrat, Roboto, sans-serif;
+    }
+
+    .main {
+      margin: 50px 120px;
+    }
+
+    .flex-table {}
+
+    .flex-table .flex-table-header {
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .flex-table .flex-table-header span {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      padding: 0 10px 10px 10px;
+    }
+
+    .flex-table .grow-2 {
+      flex-grow: 2 !important;
+    }
+
+    .flex-table .flex-table-item {
+      display: flex;
+      align-items: stretch;
+      width: auto;
+      min-height: 60px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #e5e5e5;
+      padding: 8px;
+      margin-bottom: 6px;
+      background: #323236;
+      border-color: #404046;
+    }
+
+    .flex-table .flex-table-item .flex-table-cell {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-family: Roboto, sans-serif;
+      font-weight: 200;
+    }
+
+    .flex-table-item .flex-table-cell span {
+      color: #a2a5b9;
+    }
+
+    .flex-table-item .flex-table-cell strong {
+      color: #41b883;
+    }
+
+    button {
+      padding: 4px 12px 4px 12px;
+      line-height: 1.1;
+      color: #fff;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      box-shadow: none;
+      display: inline-flex;
+      margin: 0 6px;
+      cursor: pointer;
+    }
+
+    button.primay {
+      border-color: #41b883;
+      background: #41b883;
+    }
+
+    button.danger {
+      background-color: #e62965;
+      border-color: transparent;
+    }
+
+    .flex-pagination ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+    }
+
+    .flex-pagination li {}
+
+
+    .flex-pagination li a {
+      display: inline-block;
+      background: #28282b;
+      border-color: #2d2d31;
+      color: #aaaab3;
+      border-radius: 999px;
+      margin: .25rem;
+      padding-left: .5em;
+      padding-right: .5em;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .flex-pagination li a.is-current, .flex-pagination li a:hover {
+      background: #41b883;
+      color: #fcfcfc;
+      border-color: #41b883;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div>
+      <div class="flex-table">
+        <div class="flex-table-header">
+          <span class="grow-2">Course</span>
+          <span>Category</span>
+          <span>Main Skill</span>
+          <span>Difficulty</span>
+          <span class="cell-end">Actions</span>
+        </div>
+        <div class="flex-list-inner">
+          <div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Introduction to Html5</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">Html5</span></div>
+              <div class="flex-table-cell"><strong>● ● ● <span>● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Mastering VueJS and Typescript</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">NodeJS</span></div>
+              <div class="flex-table-cell"><strong>● ● ● ● <span>●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Discovering CSS3 and Stylesheets</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">CSS3</span></div>
+              <div class="flex-table-cell"><strong>● ● <span>● ● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Get Started with Laravel 6</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">Laravel</span></div>
+              <div class="flex-table-cell"><strong>● ● ● <span>● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Python Basics for Beginners</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">Python</span></div>
+              <div class="flex-table-cell"><strong>● <span>● ● ● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Introduction to Html5</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">Html5</span></div>
+              <div class="flex-table-cell"><strong>● ● ● <span>● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Mastering VueJS and Typescript</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">NodeJS</span></div>
+              <div class="flex-table-cell"><strong>● ● ● ● <span>●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Discovering CSS3 and Stylesheets</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">CSS3</span></div>
+              <div class="flex-table-cell"><strong>● ● <span>● ● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Get Started with Laravel 6</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">Laravel</span></div>
+              <div class="flex-table-cell"><strong>● ● ● <span>● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+            <div class="flex-table-item">
+              <div class="flex-table-cell grow-2">
+                <span class="item-name">Python Basics for Beginners</span>
+              </div>
+              <div class="flex-table-cell"><span class="light-text">Web Development</span></div>
+              <div class="flex-table-cell"><span class="light-text no-push">Python</span></div>
+              <div class="flex-table-cell"><strong>● <span>● ● ● ●</span></strong></div>
+              <div class="flex-table-cell cell-end">
+                <button class="primay">View</button>
+                <button class="danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav role="navigation" class="flex-pagination pagination">
+        <ul class="pagination-list">
+          <li><a href="">1</a></li>
+          <li><a class="is-current" href="">2</a></li>
+          <li><a href="">3</a></li>
+          <li><a href="">4</a></li>
+          <li><a href="">5</a></li>
+          <li><a href="">6</a></li>
+          <li><a href="">7</a></li>
+          <li><a href="">8</a></li>
+          <li><a href="">9</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+
+</html>
