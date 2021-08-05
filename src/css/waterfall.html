@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    .container {
+      column-count: 2;
+      column-gap: 20;
+      width: 100vw;
+    }
+
+    .item {
+      break-inside: avoid;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="card">
+        <img src="" alt="图片">
+        <h3>名称</h3>
+        <p>描述。。</p>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+    // 这一段的作用是给 img 加一个随机高度， 可以删除掉
+    Array.from(document.querySelectorAll('.container .item'), (item, i) => {
+      console.log("item", item.querySelector('img'));
+      item.querySelector('img').height = Math.floor(Math.random() * 200 + 100)
+    });
+    
+    Array.from(document.querySelectorAll('.container .item:nth-child(2n)'), (item, i) => document.querySelector('.container').appendChild(item));
+  </script>
+</body>
+
+</html>
