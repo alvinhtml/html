@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./app/example/bar.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -288,6 +288,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexport
 
 /***/ }),
 
+/***/ "./app/example/bar.ts":
+/*!****************************!*\
+  !*** ./app/example/bar.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar index_1 = __importDefault(__webpack_require__(/*! ../index */ \"./app/index.ts\"));\nvar myChart = document.createElement('div');\nmyChart.className = 'chart';\ndocument.body.appendChild(myChart);\nvar pieOption = {\n    type: 'bar',\n    style: {\n        colors: ['#f2711c', '#2185d0', '#21ba45', '#b5cc18', '#00b5ad', '#fbbd08', '#6435c9', '#a333c8', '#e03997', '#a5673f'],\n        font: '12px sans-serif',\n        valueStyle: '{c}%',\n        nameStyle: '{a} {c}%',\n        legend: {\n            orient: 'horizontal',\n            position: ['center', 'top']\n        }\n    },\n    radius: '60%',\n    center: ['50%', '50%'],\n    legend: ['React', 'Vue', 'Angular'],\n    padding: [60, 20, 40, 80],\n    xAxis: {\n        type: 'category',\n        data: ['January', 'February', 'March', 'April', 'May', 'June', 'July']\n    },\n    yAxis: {\n        type: 'value',\n    },\n    data: [\n        [334, 513, 126],\n        [211, 413, 78],\n        [186, 274, 160],\n        [412, 317, 200],\n        [218, 500, 180],\n        [162, 272, 80],\n        [128, 457, 180]\n    ]\n};\nvar chart = new index_1.default(myChart);\nchart.setOption(pieOption);\nchart.addEventListener('click', function (e) {\n    console.log('click e: ', e.target.name);\n});\n\n\n//# sourceURL=webpack://simple-chart/./app/example/bar.ts?");
+
+/***/ }),
+
 /***/ "./app/index.ts":
 /*!**********************!*\
   !*** ./app/index.ts ***!
@@ -309,28 +321,6 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ch
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.getPixelRatio = exports.darken = exports.lighten = void 0;\nfunction rgbToHex(r, g, b) {\n    var hex = ((r << 16) | (g << 8) | b).toString(16);\n    return \"#\" + new Array(Math.abs(hex.length - 7)).join('0') + hex;\n}\nfunction hexToRgb(hex) {\n    var rgb = [];\n    for (var i = 1; i < 7; i += 2) {\n        rgb.push(parseInt(\"0x\" + hex.slice(i, i + 2), 16));\n    }\n    return rgb;\n}\nfunction lighten(hex) {\n    var rgb = hexToRgb(hex);\n    var arr = rgb.map(function (v) {\n        return Math.min(v + 10, 255);\n    });\n    return rgbToHex(arr[0], arr[1], arr[2]);\n}\nexports.lighten = lighten;\nfunction darken(hex) {\n    var rgb = hexToRgb(hex);\n    var arr = rgb.map(function (v) {\n        return Math.max(v - 10, 0);\n    });\n    return rgbToHex(arr[0], arr[1], arr[2]);\n}\nexports.darken = darken;\nfunction getPixelRatio(context) {\n    return (window.devicePixelRatio || 1) / 1;\n}\nexports.getPixelRatio = getPixelRatio;\n;\n\n\n//# sourceURL=webpack://simple-chart/./app/utils/tool.ts?");
-
-/***/ }),
-
-/***/ "./node_modules/hidpi-canvas/dist/hidpi-canvas.min.js":
-/*!************************************************************!*\
-  !*** ./node_modules/hidpi-canvas/dist/hidpi-canvas.min.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("/**\n * HiDPI Canvas Polyfill (1.0.10)\n *\n * Author: Jonathan D. Johnson (http://jondavidjohn.com)\n * Homepage: https://github.com/jondavidjohn/hidpi-canvas-polyfill\n * Issue Tracker: https://github.com/jondavidjohn/hidpi-canvas-polyfill/issues\n * License: Apache-2.0\n*/\n!function(a){var b=function(){var a=document.createElement(\"canvas\"),b=a.getContext(\"2d\"),c=b.backingStorePixelRatio||b.webkitBackingStorePixelRatio||b.mozBackingStorePixelRatio||b.msBackingStorePixelRatio||b.oBackingStorePixelRatio||b.backingStorePixelRatio||1;return(window.devicePixelRatio||1)/c}(),c=function(a,b){for(var c in a)a.hasOwnProperty(c)&&b(a[c],c)},d={fillRect:\"all\",clearRect:\"all\",strokeRect:\"all\",moveTo:\"all\",lineTo:\"all\",arc:[0,1,2],arcTo:\"all\",bezierCurveTo:\"all\",isPointinPath:\"all\",isPointinStroke:\"all\",quadraticCurveTo:\"all\",rect:\"all\",translate:\"all\",createRadialGradient:\"all\",createLinearGradient:\"all\"};1!==b&&(c(d,function(c,d){a[d]=function(a){return function(){var d,e,f=Array.prototype.slice.call(arguments);if(\"all\"===c)f=f.map(function(a){return a*b});else if(Array.isArray(c))for(d=0,e=c.length;e>d;d++)f[c[d]]*=b;return a.apply(this,f)}}(a[d])}),a.stroke=function(a){return function(){this.lineWidth*=b,a.apply(this,arguments),this.lineWidth/=b}}(a.stroke),a.fillText=function(a){return function(){var c=Array.prototype.slice.call(arguments);c[1]*=b,c[2]*=b,this.font=this.font.replace(/(\\d+)(px|em|rem|pt)/g,function(a,c,d){return c*b+d}),a.apply(this,c),this.font=this.font.replace(/(\\d+)(px|em|rem|pt)/g,function(a,c,d){return c/b+d})}}(a.fillText),a.strokeText=function(a){return function(){var c=Array.prototype.slice.call(arguments);c[1]*=b,c[2]*=b,this.font=this.font.replace(/(\\d+)(px|em|rem|pt)/g,function(a,c,d){return c*b+d}),a.apply(this,c),this.font=this.font.replace(/(\\d+)(px|em|rem|pt)/g,function(a,c,d){return c/b+d})}}(a.strokeText))}(CanvasRenderingContext2D.prototype),function(a){a.getContext=function(a){return function(b){var c,d,e=a.call(this,b);return\"2d\"===b&&(c=e.backingStorePixelRatio||e.webkitBackingStorePixelRatio||e.mozBackingStorePixelRatio||e.msBackingStorePixelRatio||e.oBackingStorePixelRatio||e.backingStorePixelRatio||1,d=(window.devicePixelRatio||1)/c,d>1&&(this.style.height=this.height+\"px\",this.style.width=this.width+\"px\",this.width*=d,this.height*=d)),e}}(a.getContext)}(HTMLCanvasElement.prototype);\n\n//# sourceURL=webpack://simple-chart/./node_modules/hidpi-canvas/dist/hidpi-canvas.min.js?");
-
-/***/ }),
-
-/***/ 0:
-/*!*********************************************************************************!*\
-  !*** multi ./node_modules/hidpi-canvas/dist/hidpi-canvas.min.js ./app/index.ts ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("__webpack_require__(/*! ./node_modules/hidpi-canvas/dist/hidpi-canvas.min.js */\"./node_modules/hidpi-canvas/dist/hidpi-canvas.min.js\");\nmodule.exports = __webpack_require__(/*! ./app/index.ts */\"./app/index.ts\");\n\n\n//# sourceURL=webpack://simple-chart/multi_./node_modules/hidpi-canvas/dist/hidpi-canvas.min.js_./app/index.ts?");
 
 /***/ })
 
