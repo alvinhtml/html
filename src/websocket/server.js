@@ -9,4 +9,7 @@ wss.on('connection', function connection(ws) {
     ws.send('Hi Client');
   });
 
+  setInterval(() => {
+    ws.send('Hi Client' + new Date());
+  }, 3000)
 });
