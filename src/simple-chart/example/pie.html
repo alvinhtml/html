@@ -1,35 +1,25 @@
-<!DOCTYPE html>
-<!--
-    @ Chrome    43+
-    @ Firefox   40+
-    @ Opera     31+
-    @ Android   44+
-    @ Chrome for Android    44+
--->
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-    <!-- External CSS -->
-    <title>miniChart</title>
-    <style>
-      * {
+<!doctype html><html><head><meta charset="utf-8"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><title>miniChart</title><style>* {
         margin: 0;
         padding: 0;
       }
 
       header {
-        padding: 1em;
+        padding: 1em 0;
         text-align: right;
         font-size: 12px;
       }
 
+      iframe {
+        vertical-align: middle;
+      }
+
       a {
+        font-family: Tahoma, Geneva, sans-serif;
+        display: inline-block;
+        margin-right: 8px;
         color: #333;
         text-decoration: none;
+        vertical-align: middle;
       }
 
       a:hover {
@@ -41,18 +31,4 @@
         width: 100vw;
         max-width: 980px;
         height: calc(100vh - 10vh);
-      }
-
-    </style>
-</head>
-
-<body>
-  <header>
-    <a href="./pie.html">饼状图</a> |
-    <a href="./bar.html">柱状图</a> |
-    <a href="./line.html">折线图</a> |
-    <a href="https://github.com/alvinhtml/simple-chart" target="_blank">github</a>
-  </header>
-<script type="text/javascript" src="../index.js"></script><script type="text/javascript" src="../pie.js"></script></body>
-
-</html>
+      }</style><script defer="defer" src="../index.js"></script><script defer="defer" src="../pie.js"></script></head><body><header><a href="./pie.html">饼状图</a> <a href="./bar.html">柱状图</a> <a href="./line.html">折线图</a> <a target="_blank" href="http://example.alvinhtml.com/js-mind/example/mind.html">Js-Mind</a><iframe src="https://ghbtns.com/github-btn.html?user=alvinhtml&repo=simple-chart&type=watch&count=false" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe></header></body></html>
