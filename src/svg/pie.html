@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+    @ Chrome    43+
+    @ Firefox   40+
+    @ Opera     31+
+    @ Android   44+
+    @ Chrome for Android    44+
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>SVG - Pie</title>
+    <style type="text/css">
+      path:hover {
+        fill-opacity: 1
+      }
+    </style>
+</head>
+
+<body>
+  <div class="row bg-teal" style="padding: 50px; text-align: center;">
+    <svg id="pie" width="300" height="300"></svg>
+  </div>
+  <script type="text/javascript">
+
+    // 角度转弧度
+    function toRadian(angle) {
+      return (angle / 360) * (2 * Math.PI)
+    }
+
+    /**
+     * 求 path d 属性的值
+     *
+     * @param {number}   cx 圆心 x 坐标
+     * @param {number}   cy 圆心 y 坐标
+     * @param {number}   r 半径
+     * @param {number}   sAngle 开始角度
+     * @param {number}   eAngle 结束角度
+     * @return {string}  path d
+     */
+
+    function getPathD(cx, cy, r, sAngle, eAngle) {
+      // Path A命令语法
+      // A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+      // x1 = r * Math.cos(Math.PI * 0)
+      // y1 = 60
+      // x2 = 160
+      // y2 = 60
+
+      const x1 = cx + 100 * Math.sin(toRadian(sAngle))
+      const y1 = cy - 100 * Math.cos(toRadian(sAngle))
+
+      const rx = r
+      const ry = r
+
+      const xAxisRotation = 0
+      // 角度大于 180时, 画大圆
+      const largeArc = Math.abs(eAngle - sAngle) > 180 ? 1 : 0
+      const sweep = 1
+      const x2 = cx + 100 * Math.sin(toRadian(eAngle))
+      const y2 = cy - 100 * Math.cos(toRadian(eAngle))
+
+      return `M${cx} ${cy} L${x1} ${y1} A${rx} ${ry} ${xAxisRotation} ${largeArc} ${sweep} ${x2} ${y2} Z`
+    }
+
+    function createPath(sAngle, eAngle, color) {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+      path.setAttribute('d', getPathD(150, 150, 100, sAngle, eAngle))
+      path.setAttribute('fill', color)
+      path.setAttribute('stroke', 'black')
+      path.setAttribute('stroke-width', 0)
+      path.setAttribute('fill-opacity', 0.7)
+      path.setAttribute('d-data', `${sAngle} ${eAngle}`)
+      return path
+    }
+
+    const colors = ['#f2711c', '#2185d0', '#21ba45', '#b5cc18', '#00b5ad', '#fbbd08', '#6435c9', '#a333c8', '#e03997', '#a5673f']
+    const data = [24, 92, 33, 71, 62, 58, 44, 86]
+
+    const pie = document.querySelector('#pie')
+
+    const total = data.reduce((a, b) => a + b, 0)
+
+    data.reduce((sAngle, item, i) => {
+      const angle = (item / total ) * 360
+      pie.appendChild(createPath(sAngle, sAngle + angle, colors[i]))
+      return sAngle + angle
+    }, 0)
+
+  </script>
+</body>
+
+</html>
