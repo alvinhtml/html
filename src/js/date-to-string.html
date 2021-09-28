@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div>
+      <label for="">开始时间： <input type="date" id="stime" name="stime" value="2021-09-01"></label>
+      <label for="">结束时间： <input type="date" id="etime" name="etime" value="2021-12-25"></label>
+      <button type="submit" name="button">提交</button>
+    </div>
+    <div id="text"></div>
+    <script type="text/javascript">
+      function dateList(startDate, endDate) {
+        const sTime = new Date(startDate)
+        const eTime = new Date(endDate)
+
+        const sTimeArray = [sTime.getFullYear(), sTime.getMonth(), sTime.getDate()]
+        const eTimeArray = [eTime.getFullYear(), eTime.getMonth(), eTime.getDate()]
+
+        const month = [31, sTimeArray[0] % 4 ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        const list = []
+
+        const diffTime = (eTimeArray, sTimeArray) => {
+          if (sTimeArray[0] < eTimeArray[0]) {
+            return true
+          } else {
+            if (sTimeArray[1] < eTimeArray[1]) {
+              return true
+            } else {
+              if (sTimeArray[2] < eTimeArray[2]) {
+                return true
+              }
+            }
+          }
+          return false
+        }
+
+        while (diffTime(eTimeArray, sTimeArray)) {
+          list.push([...sTimeArray])
+          if (sTimeArray[2] + 1 > month[sTimeArray[1] - 1]) {
+            sTimeArray[2] = 1
+            if (sTimeArray[1] + 1 > 12) {
+              sTimeArray[1] = 1
+              sTimeArray[0] = sTimeArray[0] + 1
+              month[1] = sTimeArray[0] % 4 ? 29 : 28
+            } else {
+              sTimeArray[1] = sTimeArray[1] + 1
+            }
+          } else {
+            sTimeArray[2] = sTimeArray[2] + 1
+          }
+        }
+
+        return list
+      }
+      console.log("document.querySelector('button')", document.querySelector('button'));
+      document.querySelector('button').onclick = (data) => {
+        const sTime = document.querySelector('#stime').value
+        const eTime = document.querySelector('#etime').value
+        console.log(sTime, eTime)
+        const res = dateList(sTime, eTime)
+        document.querySelector('#text').innerText = res.map(a => a.join('-')).join('\n')
+      }
+    </script>
+  </body>
+</html>
