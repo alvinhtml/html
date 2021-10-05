@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <button id="btn">下载</button>
+  <script type="text/javascript">
+    document.querySelector('#btn').addEventListener('click', () => {
+      const xhr = new XMLHttpRequest()
+      xhr.open('get', `/filepath`, true)
+
+      // 返回类型blob  blob 存储着大量的二进制数据
+      xhr.responseType = 'blob'
+
+      xhr.setRequestHeader('X-Token', 'jwt-token')
+
+      xhr.onload = function() {
+        if (this.status === 200) {
+          const blob = this.response
+          const reader = new FileReader()
+
+          // 转换为base64，可以直接放入a标签href
+          reader.readAsDataURL(blob)
+
+          reader.onload = function(e) {
+            // 转换完成，创建一个a标签用于下载
+            const a = document.createElement("a")
+            a.download = 'filename'
+            a.href = e.target.result
+
+            // 触发点击事件
+            const clickEvent = document.createEvent('MouseEvents')
+            clickEvent.initEvent('click', true, true)
+            a.dispatchEvent(clickEvent)
+          };
+        }
+      }
+      xhr.send()
+    }
+  </script>
+</body>
+
+</html>
