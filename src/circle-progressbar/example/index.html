@@ -1,0 +1,74 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><title>Circle Progress Bar</title><link rel="stylesheet" href="http://example.alvinhtml.com/style.css"><script src="http://example.alvinhtml.com/highlight.min.js" charset="utf-8"></script><style>main {
+      width: 770px;
+      margin: 50px auto;
+    }
+
+    .circle-box {
+      display: flex;
+      justify-content: space-around;
+      margin: 2em 0;
+    }
+
+    .circle {
+      width: 120px;
+      height: 120px;
+    }</style><script defer="defer" src="../index.js"></script><script defer="defer" src="../example.js"></script></head><body><header><iframe src="https://ghbtns.com/github-btn.html?user=alvinhtml&repo=circle-progressbar&type=watch&count=false" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe></header><main><div class="markdown-section"><div class="circle-box"><div class="circle" id="baseCircle1"></div><div class="circle" id="baseCircle2"></div><div class="circle" id="baseCircle3"></div></div><h3>install</h3><pre><code class="language-shell">npm install circle-progressbar --save</code></pre><h3>usage</h3><pre><code class="language-javascript">import CircleProgressbar from 'circle-progressbar'
+
+CircleProgressbar(document.querySelector('#baseCircle1'), {
+  value: 80,
+  total: 200
+})
+CircleProgressbar(document.querySelector('#baseCircle2'), {
+  value: 130,
+  total: 200,
+  strokeLinecap: 'round',
+  stroke: '#faad42'
+})
+const baseCircle3 = CircleProgressbar(document.querySelector('#baseCircle3'), {
+  value: 160,
+  total: 200,
+  strokeWidth: 12,
+  strokeLinecap: 'round',
+  stroke: '#f82a5e'
+})
+
+// set new value
+setInterval(() => {
+  baseCircle3.setValue(Math.random() * 200)
+}, 2000)</code></pre><h3>configure title</h3><div class="circle-box"><div class="circle" id="titleCircle" style="width: 160px; height: 160px;"></div></div><pre><code class="language-javascript">CircleProgressbar(document.querySelector('#titleCircle'), {
+  value: 9.4,
+  total: 16,
+  strokeLinecap: 'round',
+  title: (percentage: number, value: number) => {
+    return `${value}GB`
+  },
+  titleStyle: 'font-weight: 200',
+  subtitle: 'memory usage'
+})
+</code></pre><h3>semi circle</h3><div class="circle-box"><div class="circle" id="semiCircle" style="width: 160px; height: 160px;"></div></div><svg width="160" height="10"><defs><linearGradient id="linearGradient" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#e62864"/><stop offset="40%" stop-color="#faad42"/><stop offset="60%" stop-color="#faad42"/><stop offset="100%" stop-color="#41b983"/></linearGradient></defs></svg><pre><code class="language-javascript">const semiCircle = CircleProgressbar(document.querySelector('#semiCircle'), {
+  value: 50,
+  total: 100,
+  semiCircle: 0.8,
+  strokeWidth: 10,
+  // 使用 SVG linearGradient 实现渐变色
+  stroke: 'url(#linearGradient)',
+  strokeLinecap: 'round',
+  title: (percentage: number, value: number) => {
+    return `${percentage}%`
+  },
+  titleStyle: 'font-weight: 200; font-size: 18px',
+  subtitle: 'cpu usage',
+  subtitleStyle: 'font-weight: 200; fill: #999'
+})
+
+setInterval(() => {
+  semiCircle.setValue(Math.random() * 100)
+}, 2000)</code></pre><p>使用圆环渐变需要先在页面中定义一个 SVG linearGradient</p><pre><code class="language-html">&lt;svg width="160" height="10"&gt;
+  &lt;defs&gt;
+    &lt;linearGradient id="linearGradient" x1="0" y1="0" x2="1" y2="0"&gt;
+      &lt;stop offset="0%" stop-color="#e62864"/&gt;
+      &lt;stop offset="50%"  stop-color="#faad42"/&gt;
+      &lt;stop offset="100%"   stop-color="#41b983"/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;</code></pre><h3>option</h3><table><thead><tr><th>Props</th><th>Default</th><th>Type</th></tr></thead><tbody><tr><td>value</td><td>0</td><td>number</td></tr><tr><td>total</td><td>100</td><td>number</td></tr><tr><td>radius</td><td>'40%'</td><td>string | number</td></tr><tr><td>title</td><td>--</td><td>string | null | (percentage: number, value: number) => string</td></tr><tr><td>titleStyle</td><td>''</td><td>css style</td></tr><tr><td>subtitle</td><td>--</td><td>string | null | (percentage: number, value: number) => string</td></tr><tr><td>subtitleStyle</td><td>''</td><td>css style</td></tr><tr><td>strokeWidth</td><td>6</td><td>number</td></tr><tr><td>stroke</td><td>blue</td><td>color string</td></tr><tr><td>backgroundStrokeWidth</td><td>6</td><td>number</td></tr><tr><td>backgroundStroke</td><td>gray</td><td>color string</td></tr><tr><td>semiCircle</td><td>1</td><td>0 ~ 1</td></tr><tr><td>strokeLinecap</td><td>butt</td><td>butt | round | square</td></tr></tbody></table><h3>function</h3><p><b>setValue(value)</b></p><ul><li>value - number</li></ul><p>Set a new value for circle bar</p></div><script>hljs.highlightAll()</script></main></body></html>
