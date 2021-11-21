@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-user=root
-host=65.49.195.210
-port=29771
+user=ec2-user
+host=18.217.233.182
+port=22
 
 src=`pwd`"/src/"
 des=/home/wwwroot/example/
