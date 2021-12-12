@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>mobile fixed</title>
+    <style media="screen">
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 0;
+        margin: 0;
+        background: #f2f2f2;
+      }
+
+      .site-container {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+      }
+
+      .footer {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+      }
+      .footer ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 1rem;
+      }
+      .footer ul li {
+        flex: 1 0 25%;
+        text-align: center;
+      }
+
+      .context {
+        margin: 1rem;
+        background: #fff;
+        min-height: 280px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-container">
+      <div class="main">
+        <div class="context"></div>
+        <div class="context"></div>
+        <div class="context"></div>
+        <div class="context"></div>
+        <div class="context"></div>
+        <div class="context"></div>
+        <div class="context"></div>
+        <div class="context"></div>
+        <div class="context"></div>
+      </div>
+      <div class="footer">
+        <ul>
+          <li>微信</li>
+          <li>通讯录</li>
+          <li>发现</li>
+          <li>我</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
