@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Scroll</title>
+  <style media="screen">
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      width: 100vw;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    div[class*="button"] {
+      width: 36px;
+      height: 36px;
+      background: #f1f1f1;
+      color: #888;
+      font-size: 12px;
+      line-height: 36px;
+      text-align: center;
+      position: fixed;
+      right: 20px;
+      cursor: pointer;
+    }
+    .top-button {
+      top: 20px;
+    }
+    .bottom-button {
+      bottom: 20px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+  </div>
+  <div class="top-button">up</div>
+  <div class="bottom-button">down</div>
+
+  <script type="text/javascript">
+    const container = document.querySelector('.container')
+    const toper = document.querySelector('.top-button')
+    const bottomer = document.querySelector('.bottom-button')
+
+    let ticking = true
+    let scrollTop = 0
+
+    if (container && toper && bottomer) {
+      let content = ''
+      for (var i = 0; i < 100; i++) {
+        content += `<p>${i}</p>`
+      }
+      container.innerHTML = content
+
+      container.addEventListener('scroll', () => {
+        if (ticking) {
+          window.requestAnimationFrame(() => {
+            scrollListener()
+            ticking = false
+          })
+        }
+        ticking = true
+      })
+
+      toper.onclick = () => {
+        scrollToTop()
+      }
+      bottomer.onclick = () => {
+        scrollToBottom()
+      }
+    }
+
+
+    function scrollToBottom() {
+      if (container) {
+        container.scrollTop = container.scrollHeight - container.offsetHeight
+        scrollListener()
+      }
+    }
+
+    function scrollToTop() {
+      if (container) {
+        container.scrollTop = 0
+        scrollListener()
+      }
+    }
+
+    function scrollListener() {
+      scrollTop = container.scrollTop
+
+      if (scrollTop < 10) {
+        toper.style.display = 'none'
+        bottomer.style.display = 'block'
+      } else {
+        toper.style.display = 'block'
+      }
+
+      if (scrollTop > container.scrollHeight - container.offsetHeight - 10) {
+        toper.style.display = 'block'
+        bottomer.style.display = 'none'
+      } else {
+        bottomer.style.display = 'block'
+      }
+    }
+  </script>
+</body>
+
+</html>
