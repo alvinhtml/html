@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Eventsource</title>
+</head>
+<body>
+  <div class="message-container"></div>
+<script type="text/javascript">
+  const messageContainer = document.querySelector('.message-container')
+  const es = new EventSource(`http://localhost:9100`);
+  es.addEventListener('hello_event', function(event) {
+    console.log("event.data", event.data)
+    messageContainer.innerHTML += `<div>${new Date( + JSON.parse(event.data).message)}</div>`
+  })
+  es.addEventListener('error', function(event) {
+    console.log("event.data", event)
+    messageContainer.innerHTML += `error`
+    // es.close()
+  })
+  es.addEventListener('close', function(event) {
+    console.log("event.data", event.data)
+    messageContainer.innerHTML += `cloled`
+  })
+</script>
+</body>
+</html>
