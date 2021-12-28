@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas 飞线</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000000;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="mycanvas"></canvas>
+  <script type="text/javascript">
+    const mycanvas = document.getElementById('mycanvas')
+    const context = mycanvas.getContext('2d')
+
+    const canvasWidth = window.innerWidth
+    const canvasHeight = window.innerHeight
+
+    mycanvas.width = canvasWidth
+    mycanvas.height = canvasHeight
+
+    let t = 0
+
+    function draw() {
+      let p0 = {
+          x: 100,
+          y: 100
+        },
+        p1 = {
+          x: 500,
+          y: 100
+        },
+        p2 = {
+          x: 500,
+          y: 500
+        };
+
+      context.clearRect(0, 0, canvasWidth, canvasHeight);
+      context.save();
+      context.strokeStyle = 'red';
+      arc(p0, p1, p2);
+      context.restore();
+
+      context.save();
+      context.strokeStyle = 'blue';
+      context.beginPath();
+      context.moveTo(p0.x, p0.y);
+      context.quadraticCurveTo(p1.x, p1.y, p2.x, p2.y);
+      context.stroke();
+      context.restore();
+
+      let pb = {};
+      pb.x = computeCurvePoint(p0.x, p1.x, p2.x, t);
+      pb.y = computeCurvePoint(p0.y, p1.y, p2.y, t);
+      context.save();
+      context.strokeStyle = 'green';
+      context.lineWidth = 4;
+      arc(pb);
+      context.restore();
+      t += 0.005;
+      if (t > 1) {
+        t = 0;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    function arc(...ps) {
+      ps.forEach(p => {
+        context.beginPath();
+        context.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        context.stroke();
+      });
+    }
+
+    function computeCurvePoint(a0, a1, a2, t) {
+      let b = (1 - t) * (1 - t) * a0 + 2 * (1 - t) * t * a1 + t * t * a2;
+      return b;
+    }
+
+    draw();
+  </script>
+</body>
+
+</html>
