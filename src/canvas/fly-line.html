@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas 飞线</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000000;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="mycanvas"></canvas>
+  <script type="text/javascript">
+    const mycanvas = document.getElementById('mycanvas')
+    const context = mycanvas.getContext('2d')
+
+    const canvasWidth = window.innerWidth
+    const canvasHeight = window.innerHeight
+
+    mycanvas.width = canvasWidth
+    mycanvas.height = canvasHeight
+
+    console.log(canvasWidth, canvasHeight);
+
+    // 创建渐变
+    function createGradient(context, p0, p1) {
+      const gradient = context.createLinearGradient(p0.x, p0.y, p1.x, p1.y)
+
+      gradient.addColorStop(0, 'rgba(255, 0, 255, 0)')
+      gradient.addColorStop(1, 'rgba(255, 0, 255, 1)')
+
+      return gradient
+    }
+
+    // 绘制线条
+    function createLine(context, p0, p1) {
+      const gradient = createGradient(context, p0, p1)
+
+      context.beginPath()
+      context.moveTo(p0.x, p0.y)
+      context.quadraticCurveTo(p1.x, p1.y, p1.x, p1.y)
+      context.strokeStyle = gradient
+      context.lineCap = 'round'
+      context.lineWidth = 3
+      context.shadowColor = 'rgba(255, 0, 255, 1)'
+      context.shadowBlur = 5
+      context.stroke()
+    }
+
+    createLine(context, {
+      x: Math.random() * canvasWidth,
+      y: Math.random() * canvasHeight
+    }, {
+      x: Math.random() * canvasWidth,
+      y: Math.random() * canvasHeight
+    })
+  </script>
+</body>
+
+</html>
