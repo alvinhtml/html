@@ -35,25 +35,23 @@
     mycanvas.width = canvasWidth
     mycanvas.height = canvasHeight
 
-    console.log(canvasWidth, canvasHeight);
-
     // 创建渐变
     function createGradient(context, p0, p1) {
       const gradient = context.createLinearGradient(p0.x, p0.y, p1.x, p1.y)
 
-      gradient.addColorStop(0, 'rgba(255, 0, 255, 0)')
-      gradient.addColorStop(1, 'rgba(255, 0, 255, 1)')
+      gradient.addColorStop(0, 'rgba(255, 255, 0, 0)')
+      gradient.addColorStop(1, 'rgba(255, 255, 0, 1)')
 
       return gradient
     }
 
     // 绘制线条
-    function createLine(context, p0, p1) {
+    function createLine(p0, p1) {
       const gradient = createGradient(context, p0, p1)
 
       context.beginPath()
       context.moveTo(p0.x, p0.y)
-      context.quadraticCurveTo(p1.x, p1.y, p1.x, p1.y)
+      context.lineTo(p1.x, p1.y)
       context.strokeStyle = gradient
       context.lineCap = 'round'
       context.lineWidth = 3
@@ -62,13 +60,54 @@
       context.stroke()
     }
 
-    createLine(context, {
-      x: Math.random() * canvasWidth,
-      y: Math.random() * canvasHeight
-    }, {
-      x: Math.random() * canvasWidth,
-      y: Math.random() * canvasHeight
-    })
+    const P0 = {
+      x: 100,
+      y: 100
+    }
+
+    const P1 = {
+      x: 600,
+      y: 300
+    }
+
+    let t0 = 0
+    let t1 = 0
+
+    function draw() {
+      context.clearRect(0, 0, canvasWidth, canvasHeight)
+
+      if (t1 < 0.3) {
+        t0 = 0
+      }
+
+      if (t0 > 0.7) {
+        t1 = 1
+      }
+
+      const startPoint = computeLinePoint(P0, P1, t0)
+      const endPoint = computeLinePoint(P0, P1, t1)
+
+      context.save()
+      createLine(startPoint, endPoint)
+      context.restore()
+      t0 += 0.005
+      t1 += 0.005
+      if (t0 > 1 && t1 > 1) {
+        t0 = 0
+        t1 = 0
+      }
+
+      requestAnimationFrame(draw)
+    }
+
+    draw()
+
+    function computeLinePoint(p0, p1, t) {
+      return {
+        x: p0.x + (p1.x - p0.x) * t,
+        y: p0.y + (p1.y - p0.y) * t
+      }
+    }
   </script>
 </body>
 
