@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>canvas 飞线</title>
+  <title>Curve</title>
   <style>
     body {
       margin: 0;
@@ -43,57 +43,64 @@
           y: 100
         },
         p1 = {
-          x: 500,
-          y: 100
+          x: 400,
+          y: 200
         },
         p2 = {
           x: 500,
           y: 500
         };
 
-      context.clearRect(0, 0, canvasWidth, canvasHeight);
-      context.save();
-      context.strokeStyle = 'red';
-      arc(p0, p1, p2);
-      context.restore();
+      context.clearRect(0, 0, canvasWidth, canvasHeight)
+      context.save()
+      context.strokeStyle = 'red'
+      arc(p0, p1, p2)
+      context.restore()
 
-      context.save();
-      context.strokeStyle = 'blue';
-      context.beginPath();
-      context.moveTo(p0.x, p0.y);
-      context.quadraticCurveTo(p1.x, p1.y, p2.x, p2.y);
-      context.stroke();
-      context.restore();
+      context.save()
+      context.strokeStyle = 'blue'
+      context.beginPath()
+      context.moveTo(p0.x, p0.y)
+      context.quadraticCurveTo(p1.x, p1.y, p2.x, p2.y)
+      context.stroke()
+      context.restore()
 
-      let pb = {};
-      pb.x = computeCurvePoint(p0.x, p1.x, p2.x, t);
-      pb.y = computeCurvePoint(p0.y, p1.y, p2.y, t);
-      context.save();
-      context.strokeStyle = 'green';
-      context.lineWidth = 4;
-      arc(pb);
-      context.restore();
-      t += 0.005;
+      let pb = {}
+      pb.x = computeCurvePoint(p0.x, p1.x, p2.x, t)
+      pb.y = computeCurvePoint(p0.y, p1.y, p2.y, t)
+      context.save()
+      context.strokeStyle = 'green'
+      context.lineWidth = 4
+      arc(pb)
+      context.restore()
+      t += 0.005
       if (t > 1) {
-        t = 0;
+        t = 0
       }
-      requestAnimationFrame(draw);
+      requestAnimationFrame(draw)
     }
 
-    function arc(...ps) {
-      ps.forEach(p => {
-        context.beginPath();
-        context.arc(p.x, p.y, 3, 0, Math.PI * 2);
+    function arc(...points) {
+      points.forEach(p => {
+        context.beginPath()
+        context.arc(p.x, p.y, 3, 0, Math.PI * 2)
         context.stroke();
       });
     }
 
-    function computeCurvePoint(a0, a1, a2, t) {
-      let b = (1 - t) * (1 - t) * a0 + 2 * (1 - t) * t * a1 + t * t * a2;
-      return b;
+    /*!
+     * 计算二次贝塞尔曲线上的点
+     * @param {Number} p0 起始点
+     * @param {Number} p1 控制点
+     * @param {Number} p2 结束点
+     * @param {Number} t 0-1的集合
+     * @return {Number} 返回计算后的点
+     */
+    function computeCurvePoint(p0, p1, p2, t) {
+      return (1 - t) * (1 - t) * p0 + 2 * t * (1 - t) * p1 + t * t * p2
     }
 
-    draw();
+    draw()
   </script>
 </body>
 
